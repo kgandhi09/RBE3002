@@ -21,3 +21,13 @@ def sortList(list):
 
 sortList(gods)
 sortList(dummy)
+
+
+#Approach 2 - Using the built-in function
+
+def sortList2(list):
+    list.sort()
+    print(list)
+
+sortList2(gods)
+sortList2(dummy)
