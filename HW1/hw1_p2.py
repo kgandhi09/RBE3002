@@ -1,38 +1,51 @@
 #Problem 2: Calculating Mean and Variance
-
-import random
 import csv
-import numpy as np
+import math
 
 #Note: Please change the path to equivalent destination
 csv_path = 'HW1/hw1_p2_data.csv'
 
-random_int = random.randint(10,30)
-
 randomList = []
-#Generating a list of random integers
-for i in range(0, random_int):
-    randomList.append(random.uniform(1,30))
-
-#writing randomly generated list to a csv file
-with open(csv_path, 'wb') as f:
-    writer = csv.writer(f)
-    for val in randomList:
-        writer.writerow([val])
-
 
 #reading numbers from csv file
 file = csv.reader(open(csv_path, 'r'))
-readList = []
 for row in file:
-    readList.append(row[0])
+    randomList.append(row[0])
 
 #converting the list of strings read from csv to int
-for i in range(len(readList)):
-    readList[i] = float(readList[i])
+for i in range(len(randomList)):
+    randomList[i] = float(randomList[i])
+
 
 #Calculating the mean and variance of randomly read numbers from the list
-def calc_mean_var(list):
+#Approach 1: Using standard calculations
+def calc_mean_var1(list):
+    sum = 0
+
+    #calculating mean
+    for i in range(len(list)):
+        sum = sum + list[i]
+
+    mean_list = sum/len(list)
+    mean_list = float(str(round(mean_list, 2)))
+
+    #calculating Variance
+    var_sum = 0
+    for j in range(len(list)):
+        var_sum = var_sum + math.pow((list[j] - mean_list), 2)
+
+    var_list = var_sum/len(list)
+    var_list = float(str(round(var_list, 2)))
+
+    print(mean_list, var_list)
+
+
+#Calculating the mean and variance of randomly read numbers from the list
+#Approach 2: Using built-in library numpy
+
+import numpy as np
+
+def calc_mean_var2(list):
     mean_list = np.mean(list)
     var_list = np.var(list)
 
@@ -40,4 +53,5 @@ def calc_mean_var(list):
     var_list = float(str(round(var_list, 2)))
     print(mean_list, var_list)
 
-calc_mean_var(readList)
+calc_mean_var1(randomList)
+calc_mean_var2(randomList)
