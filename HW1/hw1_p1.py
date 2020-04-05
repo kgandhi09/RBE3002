@@ -1,7 +1,6 @@
 #Problem 1: List Sorting
 
 gods = ["Notus", "Momus", "Nereus", "Glaucus", "Heracles", "Eurus", "Aether", "Phosphorous", "Zelus", "Tartarus"]
-dummy = ["Hello", "Hella"]
 
 def sortList(list):
     for i in range(len(list)-1):
@@ -17,17 +16,16 @@ def sortList(list):
                     if (list[j][ind] != list[j+1][ind]):
                         break
                 
-    print(list)
+    return list
 
-sortList(gods)
-sortList(dummy)
-
+sorted_list_1 = sortList(gods)
+print(sorted_list_1)
 
 #Approach 2 - Using the built-in function
 
 def sortList2(list):
     list.sort()
-    print(list)
+    return list
 
-sortList2(gods)
-sortList2(dummy)
+sorted_list_2 = sortList2(gods)
+print(sorted_list_2)
