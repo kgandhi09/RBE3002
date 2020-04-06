@@ -15,17 +15,16 @@ def sortList(list):
                     list[j], list[j+1] = list[j+1], list[j]
                     if (list[j][ind] != list[j+1][ind]):
                         break
-                
+    print list            
     return list
 
-sorted_list_1 = sortList(gods)
-print(sorted_list_1)
 
 #Approach 2 - Using the built-in function
-
 def sortList2(list):
     list.sort()
+    print list
     return list
 
-sorted_list_2 = sortList2(gods)
-print(sorted_list_2)
+if __name__ == "__main__":
+    sorted_list_1 = sortList(gods)
+    sorted_list_2 = sortList2(gods)

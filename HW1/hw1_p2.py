@@ -38,10 +38,11 @@ def calc_mean_var1(list):
     var_list = float(str(round(var_list, 2)))
 
     mean_var_list = [mean_list, var_list]
+    print(mean_var_list)
     return mean_var_list
 
-mean_var_list1 = calc_mean_var1(randomList)
-print(mean_var_list1)
+
+
 
 #Calculating the mean and variance of randomly read numbers from the list
 #Approach 2: Using built-in library numpy
@@ -55,7 +56,9 @@ def calc_mean_var2(list):
     mean_list = float(str(round(mean_list, 2)))
     var_list = float(str(round(var_list, 2)))
     mean_var_list = [mean_list, var_list]
+    print(mean_var_list)
     return mean_var_list
 
-mean_var_list2 = calc_mean_var2(randomList)
-print(mean_var_list2)
+if __name__ == "__main__":
+    mean_var_list1 = calc_mean_var1(randomList)
+    mean_var_list2 = calc_mean_var2(randomList)
