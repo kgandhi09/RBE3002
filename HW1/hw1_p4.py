@@ -1,7 +1,7 @@
 #Problem 4: "Invalid Velocity Request!"
 
 from math import pi
-test_value = 0.22
+test_value = 0.21
 
 #Given
 wheel_space = 0.156     #in mm center-to-center
