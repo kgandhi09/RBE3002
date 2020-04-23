@@ -1,11 +1,11 @@
 #Problem 3: Calculate right and left Wheel Velocities in rpm
 
 from math import pi
-test_value = 0.05     #in m/s
+test_value = 2.2     #in m/s
 
 #Given
-wheel_space = 0.156     #in mm center-to-center
-wheel_diameter = 0.065   #in m
+wheel_space = 0.22     #in mm center-to-center
+wheel_diameter = 0.08   #in m
 wheel_radius = wheel_diameter/2   #in m
 
 #Assuming the robot is moving in straight motion
