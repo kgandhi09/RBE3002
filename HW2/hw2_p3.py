@@ -4,7 +4,7 @@ import math
 import numpy as np
 from matplotlib import pyplot as plt
 
-def traj_generate(path_plan):
+def traj_generate_3(path_plan):
     base = 0.156
     pose = []
     pose_list = []
@@ -56,14 +56,7 @@ def traj_generate(path_plan):
 
         i = i + 1
 
-    print_list(pose_list)
-    count = 0
-
-    while count < len(pose_list):
-        plt.plot(pose_list[0], pose_list[1])
-        count = count + 1
-    plt.show()
-    
+    return pose_list
 
 def print_list(list):
     for j in list:
@@ -77,7 +70,12 @@ if __name__ == "__main__":
                 [26.5, 0.15, 0.15, 4, 2, -3.14159], 
                 [ 9.1, 0.22, 0.22, 0, 2, -1.5709] ]
                 
-    traj_generate(path_plan)
-    
+    trajectory = traj_generate_3(path_plan)
+    print_list(trajectory)
+    count = 0
 
+    while count < len(trajectory):
+        plt.scatter(trajectory[count][0], trajectory[count][1])
+        count = count + 1
+    plt.show()
 
