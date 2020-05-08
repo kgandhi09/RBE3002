@@ -7,6 +7,7 @@ from geometry_msgs.msg import Point, Twist
 from laser_geometry import LaserProjection
 import math
 from math import sin, cos, pi
+import random
 
 
 class Explore:
@@ -23,17 +24,19 @@ class Explore:
         self.velocity_publisher = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
         
 
-
     def callback(self, msg):
         ranges = list(msg.ranges)
         cloud_out = self.laser_proj.projectLaser(msg)
 
         front_thresh = 0.27
+        side_thresh = 0.5
+        tolerance = 0.4
 
         right_dist_average = 0
         left_dist_average = 0
 
         front_dist = 100
+
 
         if len(ranges) != 0:
             right_dist = list(ranges[45:134])
@@ -50,24 +53,35 @@ class Explore:
         right = False
         left = False
 
-        if right_dist_average > left_dist_average and diff > 1:
+        if right_dist_average > left_dist_average and diff > tolerance:
             left = True
 
-        if left_dist_average > right_dist_average and diff > 1:
+        if left_dist_average > right_dist_average and diff > tolerance:
+            right = True
+
+        if (right_dist_average > side_thresh) and (left_dist_average > side_thresh):
+            left = True
             right = True
 
         if front_dist>front_thresh:
-            print 'drive straight'
-            self.send_speed(0.1,0)
+            print 'drive straight', right_dist_average, left_dist_average
+            # self.send_speed(0.1,0)
         else:
             if left and (not right):
-                print 'turn left'
-                self.rotate(pi/2, 0.1)
+                print 'turn left', right_dist_average, left_dist_average, diff
+                # self.rotate(pi/2, 0.1)
             if right and (not left):
-                print 'turn right'
-                self.rotate(pi/2, -0.1)
+                print 'turn right', right_dist_average, left_dist_average, diff
+                # self.rotate(pi/2, -0.1)
             if (not right) and (not left):
-                print 'drive back'
+                print 'drive back', right_dist_average, left_dist_average, diff
+            if left and right:
+                x = random.randint(0,1)
+                if x == 0:
+                    print 'turn left rand', right_dist_average, left_dist_average, diff
+                else:
+                    print 'turn right rand', right_dist_average, left_dist_average, diff
+        # rospy.sleep(0.2)
 
                 
     def send_speed(self, linear_speed, angular_speed):
@@ -127,6 +141,7 @@ class Explore:
 
     def run(self):
         self.callback(LaserScan())
+
         rospy.spin()
 
 if __name__ == "__main__":
